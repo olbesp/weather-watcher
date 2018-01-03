@@ -19,7 +19,9 @@
     "build": "npm-run-all build:css build:js clean imagemin usemin"
   },
   "babel": {
-    "presets": ["env"]
+    "presets": [
+      "env"
+    ]
   },
   "author": "Oleksii Bespalko",
   "license": "ISC",
