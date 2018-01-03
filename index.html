@@ -43,6 +43,7 @@
         <div class="temp__min">
           <span>Min</span>
         </div>
+        <button type="button" class="btn" name="button">C / F</button>
         <div class="temp__max">
           <span>Max</span>
         </div>
@@ -83,9 +84,11 @@
           };
 
           infoWindow.setPosition(pos);
-          infoWindow.setContent('Location found.');
-          infoWindow.open(map);
           map.setCenter(pos);
+          let marker = new google.maps.Marker({
+            position: pos,
+            map: map
+          });
         }, function() {
           handleLocationError(true, infoWindow, map.getCenter());
         });
