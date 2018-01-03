@@ -11,6 +11,13 @@ const init = (function() {
   const windSpeed = document.querySelector('.wind__speed');
   let pos;
   let url;
+  let degree = 'C'; // Celsius by default
+
+  document.querySelector('.btn').addEventListener('click', function() {
+    degree === 'C' ? degree = 'F' : degree = 'C';
+    minTemp.textContent = convert(degree, minTemp.textContent);
+    maxTemp.textContent = convert(degree, maxTemp.textContent);
+  });
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -62,6 +69,13 @@ const init = (function() {
     pressure.textContent += res.data.main.pressure;
     windDegree.textContent = getCardinalDirection(res.data.wind.deg);
     windSpeed.textContent = `${res.data.wind.speed.toFixed(1)} m/s`;
+  }
+
+  function convert(degree, temp) {
+    if (degree == "F") {
+      return Math.round(temp * 9 / 5 + 32);
+    }
+    return Math.round((temp - 32) * 5 / 9);
   }
 
   function getCardinalDirection(angle) {
