@@ -9,8 +9,7 @@ const init = (function() {
   const pressure = document.querySelector('.pressure');
   const windDegree = document.querySelector('.wind__degree');
   const windSpeed = document.querySelector('.wind__speed');
-  let pos;
-  let url;
+  let pos, url;
   let degree = 'C'; // Celsius by default
 
   document.querySelector('.btn').addEventListener('click', function() {
@@ -27,8 +26,6 @@ const init = (function() {
       };
       url = `https://fcc-weather-api.glitch.me/api/current?lat=${pos.lat}&lon=${pos.lng}`;
       sendRequest();
-      console.log(url);
-      console.log(position);
     }, showError);
   } else {
     // Browser doesn't support Geolocation
@@ -90,11 +87,6 @@ const init = (function() {
     }
     return arrows['north'];
   }
-  // function appendComment(comment) {
-  //   var newP = document.createElement('p');
-  //   newP.innerText = comment.email;
-  //   section.appendChild(newP);
-  // }
 
   function handleErrors(err) {
     if (err.response) {
@@ -107,5 +99,3 @@ const init = (function() {
   }
 
 })();
-
-// AIzaSyCNnMnCBQZ9HexzA0gigneirn4rWf-FeXU
