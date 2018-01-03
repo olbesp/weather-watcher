@@ -1,6 +1,14 @@
 const init = (function() {
 
   const dataBox = document.getElementById('data');
+  const icon = document.querySelector('.weather-icon');
+  const minTemp = document.querySelector('.temp__min');
+  const maxTemp = document.querySelector('.temp__max');
+  const location = document.querySelector('.location');
+  const humidity = document.querySelector('.humidity');
+  const pressure = document.querySelector('.pressure');
+  const windDegree = document.querySelector('.wind__degree');
+  const windSpeed = document.querySelector('.wind__speed');
   let pos;
   let url;
 
@@ -46,8 +54,28 @@ const init = (function() {
 
   function updateDOM(res) {
     console.log(res.data);
+    icon.src = res.data.weather[0].icon;
+    minTemp.append(res.data.main.temp_min);
+    maxTemp.append(res.data.main.temp_max);
+    location.textContent = res.data.name;
+    humidity.textContent += res.data.main.humidity;
+    pressure.textContent += res.data.main.pressure;
+    windDegree.textContent = getCardinalDirection(res.data.wind.deg);
+    windSpeed.textContent = `${res.data.wind.speed.toFixed(1)} m/s`;
   }
 
+  function getCardinalDirection(angle) {
+    if (typeof angle === 'string') angle = parseInt(angle);
+    if (angle <= 0 || angle > 360 || typeof angle === 'undefined') return '☈';
+    const arrows = { north: '↑ N', north_east: '↗ NE', east: '→ E', south_east: '↘ SE', south: '↓ S', south_west: '↙ SW', west: '← W', north_west: '↖ NW' };
+    const directions = Object.keys(arrows);
+    const degree = 360 / directions.length;
+    angle = angle + degree / 2;
+    for (let i = 0; i < directions.length; i++) {
+      if (angle >= (i * degree) && angle < (i + 1) * degree) return arrows[directions[i]];
+    }
+    return arrows['north'];
+  }
   // function appendComment(comment) {
   //   var newP = document.createElement('p');
   //   newP.innerText = comment.email;

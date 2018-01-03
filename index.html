@@ -7,9 +7,21 @@
   <link rel="stylesheet" href="css/style.css">
   <title>Weather Watcher</title>
   <style>
-  #data {
+  .container {
+    width: 80%;
     height: 50%;
+    margin: 0 auto;
+    text-align: center;
   }
+  .temp {
+    display: flex;
+    justify-content: space-around;
+  }
+  .temp__min, .temp__max {
+    display: flex;
+    flex-direction: column;
+  }
+
   #map {
       height: 50%;
     }
@@ -22,7 +34,33 @@
   </style>
 </head>
 <body>
-  <div id="data"></div>
+  <div class="container">
+    <h1>Weather Watcher</h1>
+    <div id="data">
+      <h3 class="location"></h3>
+      <img class="weather-icon" src="" alt="Weather icon">
+      <div class="temp">
+        <div class="temp__min">
+          <span>Min</span>
+        </div>
+        <div class="temp__max">
+          <span>Max</span>
+        </div>
+      </div>
+      <div class="humidity">Humidity: </div>
+      <div class="pressure">Pressure: </div>
+      <div class="wind">
+        Wind
+        <div class="wind__degree">
+
+        </div>
+        <div class="wind__speed">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="map"></div>
 
   <script src="node_modules/axios/dist/axios.min.js"></script>

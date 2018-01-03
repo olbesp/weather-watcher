@@ -1,8 +1,16 @@
-"use strict";
+'use strict';
 
 var init = function () {
 
   var dataBox = document.getElementById('data');
+  var icon = document.querySelector('.weather-icon');
+  var minTemp = document.querySelector('.temp__min');
+  var maxTemp = document.querySelector('.temp__max');
+  var location = document.querySelector('.location');
+  var humidity = document.querySelector('.humidity');
+  var pressure = document.querySelector('.pressure');
+  var windDegree = document.querySelector('.wind__degree');
+  var windSpeed = document.querySelector('.wind__speed');
   var pos = void 0;
   var url = void 0;
 
@@ -12,7 +20,7 @@ var init = function () {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
-      url = "https://fcc-weather-api.glitch.me/api/current?lat=" + pos.lat + "&lon=" + pos.lng;
+      url = 'https://fcc-weather-api.glitch.me/api/current?lat=' + pos.lat + '&lon=' + pos.lng;
       sendRequest();
       console.log(url);
       console.log(position);
@@ -45,8 +53,28 @@ var init = function () {
 
   function updateDOM(res) {
     console.log(res.data);
+    icon.src = res.data.weather[0].icon;
+    minTemp.append(res.data.main.temp_min);
+    maxTemp.append(res.data.main.temp_max);
+    location.textContent = res.data.name;
+    humidity.textContent += res.data.main.humidity;
+    pressure.textContent += res.data.main.pressure;
+    windDegree.textContent = getCardinalDirection(res.data.wind.deg);
+    windSpeed.textContent = res.data.wind.speed.toFixed(1) + ' m/s';
   }
 
+  function getCardinalDirection(angle) {
+    if (typeof angle === 'string') angle = parseInt(angle);
+    if (angle <= 0 || angle > 360 || typeof angle === 'undefined') return '☈';
+    var arrows = { north: '↑ N', north_east: '↗ NE', east: '→ E', south_east: '↘ SE', south: '↓ S', south_west: '↙ SW', west: '← W', north_west: '↖ NW' };
+    var directions = Object.keys(arrows);
+    var degree = 360 / directions.length;
+    angle = angle + degree / 2;
+    for (var i = 0; i < directions.length; i++) {
+      if (angle >= i * degree && angle < (i + 1) * degree) return arrows[directions[i]];
+    }
+    return arrows['north'];
+  }
   // function appendComment(comment) {
   //   var newP = document.createElement('p');
   //   newP.innerText = comment.email;
@@ -55,11 +83,11 @@ var init = function () {
 
   function handleErrors(err) {
     if (err.response) {
-      dataBox.innerHTML = "Problem with response " + err.response.status;
+      dataBox.innerHTML = 'Problem with response ' + err.response.status;
     } else if (err.request) {
       dataBox.innerHTML = 'Problem with request';
     } else {
-      dataBox.innerHTML = "Error " + err.message;
+      dataBox.innerHTML = 'Error ' + err.message;
     }
   }
 }();
