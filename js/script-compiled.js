@@ -1,51 +1,67 @@
 "use strict";
 
-var dataController = function () {
+var init = function () {
 
-  var successLocation = function successLocation(position) {
-    var coordinates = position.coords;
-    console.log(coordinates);
-    console.log(coordinates.latitude);
-    console.log(coordinates.longitude);
-  };
+  var dataBox = document.getElementById('data');
+  var pos = void 0;
+  var url = void 0;
 
-  var rejectLocation = function rejectLocation(error) {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      url = "https://fcc-weather-api.glitch.me/api/current?lat=" + pos.lat + "&lon=" + pos.lng;
+      sendRequest();
+      console.log(url);
+      console.log(position);
+    }, showError);
+  } else {
+    // Browser doesn't support Geolocation
+    dataBox.innerHTML = "Geolocation is not supported by this browser.";
+  }
+
+  function showError(error) {
     switch (error.code) {
       case error.PERMISSION_DENIED:
-        return "User denied the request for Geolocation.";
+        dataBox.innerHTML = "User denied the request for Geolocation.";
+        break;
       case error.POSITION_UNAVAILABLE:
-        return "Location information is unavailable.";
+        dataBox.innerHTML = "Location information is unavailable.";
+        break;
       case error.TIMEOUT:
-        return "The request to get user location timed out.";
+        dataBox.innerHTML = "The request to get user location timed out.";
+        break;
       case error.UNKNOWN_ERROR:
-        return "An unknown error occurred.";
+        dataBox.innerHTML = "An unknown error occurred.";
+        break;
     }
-  };
+  }
 
-  return {
+  function sendRequest() {
+    axios.get(url).then(updateDOM).catch(handleErrors);
+  }
 
-    getLocation: function getLocation() {
-      if (navigator.geolocation) {
-        return navigator.geolocation.getCurrentPosition(successLocation, rejectLocation);
-      } else {
-        return "Geolocation is not supported by this browser.";
-      }
+  function updateDOM(res) {
+    console.log(res.data);
+  }
+
+  // function appendComment(comment) {
+  //   var newP = document.createElement('p');
+  //   newP.innerText = comment.email;
+  //   section.appendChild(newP);
+  // }
+
+  function handleErrors(err) {
+    if (err.response) {
+      dataBox.innerHTML = "Problem with response " + err.response.status;
+    } else if (err.request) {
+      dataBox.innerHTML = 'Problem with request';
+    } else {
+      dataBox.innerHTML = "Error " + err.message;
     }
-
-  };
+  }
 }();
-
-var UIController = function () {}();
-
-var appController = function (dataCtrl, UICtrl) {
-  var pos = dataCtrl.getLocation();
-  return {
-    init: function init() {
-      console.log(pos);
-    }
-  };
-}(dataController, UIController);
-
-appController.init();
 
 // AIzaSyCNnMnCBQZ9HexzA0gigneirn4rWf-FeXU
