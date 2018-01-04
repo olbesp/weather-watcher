@@ -48,6 +48,12 @@ $text-shadow: 0 .2rem .5rem rgba(0, 0, 0, .5);
   width: 30%;
   border-radius: 5px;
   box-shadow: $board-box-shadow;
+
+  @include respond(phone) {
+    width: 70%;
+    height: 22rem;
+    margin-bottom: 2rem;
+  }
 }
 
 

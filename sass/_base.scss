@@ -10,7 +10,6 @@ html {
   // Defines what 1 rem is
   font-size: 62.5%; // 1rem = 10px
 
-
   @include respond(tab-land) { // width < 1200
     font-size: 56.5%; // 1rem = 9px, 9/16 = 56.5%
   }

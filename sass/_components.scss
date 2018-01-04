@@ -4,6 +4,10 @@
   padding: 3rem;
   color: white;
   text-shadow: $text-shadow;
+
+  @include respond(phone) {
+    padding: 1rem;
+  }
 }
 
 .location {

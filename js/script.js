@@ -14,8 +14,6 @@ const init = (function() {
   let pos, url;
   let degree = 'C'; // Celsius by default
 
-  window.addEventListener('load', setBackground);
-
   btn.addEventListener('click', function() {
     degree === 'C' ? degree = 'F' : degree = 'C';
     minTemp.textContent = convert(degree, minTemp.textContent);
@@ -77,19 +75,17 @@ const init = (function() {
   }
 
   function updateDOM(res) {
-    console.log(res.data);
+    //console.log(res.data);
     icon.src = res.data.weather[0].icon;
     weather.textContent = res.data.weather[0].main;
-    const dataTempMin = res.data.main.temp_min;
-    const dataTempMax = res.data.main.temp_max;
     minTemp.textContent = `${formatTemp(res.data.main.temp_min)}`;
     maxTemp.textContent = `${formatTemp(res.data.main.temp_max)}`;
     location.textContent = res.data.name;
-
     humidity.textContent += res.data.main.humidity;
     pressure.textContent += res.data.main.pressure;
     windDegree.textContent = getCardinalDirection(res.data.wind.deg);
     windSpeed.textContent = `${res.data.wind.speed.toFixed(1)} m/s`;
+    setBackground();
   }
 
   function formatTemp(temp) {
