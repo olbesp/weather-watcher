@@ -4,23 +4,18 @@ var init = function () {
 
   var dataBox = document.getElementById('data');
   var icon = document.querySelector('.weather-icon');
-  var weather = document.querySelector('.weather');
-  var minTemp = document.querySelector('.temp__min');
-  var maxTemp = document.querySelector('.temp__max');
+  var weather = document.querySelector('.weather-type');
+  var minTemp = document.querySelector('.weather-box__temp-min');
+  var maxTemp = document.querySelector('.weather-box__temp-max');
   var location = document.querySelector('.location');
-  var humidity = document.querySelector('.humidity');
-  var pressure = document.querySelector('.pressure');
-  var windDegree = document.querySelector('.wind__degree');
-  var windSpeed = document.querySelector('.wind__speed');
+  var humidity = document.querySelector('.weather-box__data__humidity');
+  var pressure = document.querySelector('.weather-box__data__pressure');
+  var windDegree = document.querySelector('.weather-box__data__wind-degree');
+  var windSpeed = document.querySelector('.weather-box__data__wind-speed');
   var btn = document.querySelector('input[type="checkbox"]');
   var pos = void 0,
       url = void 0;
   var degree = 'C'; // Celsius by default
-
-  var bgImages = {
-    day: ['clear-day.jpeg', 'clouds-day.jpeg', 'fog-day.jpeg', 'rain-day.jpeg', 'snow-day.jpeg', 'storm-day.jpeg'],
-    night: ['clear-night.jpeg', 'clouds-night.jpeg', 'fog-night.jpeg', 'rain-night.jpeg', 'snow-night.jpeg', 'storm-night.jpeg']
-  };
 
   window.addEventListener('load', setBackground);
 

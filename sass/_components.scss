@@ -1,5 +1,22 @@
+.main-heading {
+  font-size: 4rem;
+  padding: 3rem;
+}
+
+.location {
+  font-size: 2rem;
+}
+
+.weather-icon {
+  width: 4.5rem;
+}
+
+.weather-type {
+  font-size: 1.5rem;
+}
+//////////////////////////////
 // Celsius / Fahrenheit button
-.btn {
+.weather-box__temp-btn {
   position: relative;
   display: inline-block;
   width: 50px;

@@ -2,5 +2,43 @@
   text-align: center;
   background-size: cover;
   background-position: center;
-  height: 50vh;
+  height: 100vh;
+  position: relative;
 }
+
+.weather-box {
+  display: flex;
+  justify-content: space-around;
+
+  &__index {
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__temp {
+    @include flexContainer;
+    @include board;
+  }
+
+  &__data {
+    @include flexContainer;
+    @include board;
+  }
+}
+
+#map {
+  @include board;
+
+}
+// .temp {
+//   display: flex;
+//   justify-content: space-around;
+//
+//   &__min,
+//   &__max {
+//     display: flex;
+//     flex-direction: column;
+//   }
+// }
