@@ -1,4 +1,7 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   text-align: center;
   background-size: cover;
   background-position: center;
@@ -32,13 +35,10 @@
   @include board;
 
 }
-// .temp {
-//   display: flex;
-//   justify-content: space-around;
-//
-//   &__min,
-//   &__max {
-//     display: flex;
-//     flex-direction: column;
-//   }
-// }
+.footer {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 3rem;
+}
