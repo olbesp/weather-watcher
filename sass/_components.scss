@@ -1,19 +1,15 @@
 .main-heading {
   font-family: 'Megrim', cursive;
-  font-size: 4rem;
+  font-size: 5rem;
   padding: 3rem;
-  color: $color-blue;
-
-  @supports (-webkit-background-clip: text) {
-    -webkit-background-clip: text;
-    background-image: linear-gradient(to right, $color-blue 30%, $color-orange);
-    color: transparent;
-  }
+  color: white;
+  text-shadow: $text-shadow;
 }
 
 .location {
   font-size: 2rem;
   color: $color-orange;
+  text-shadow: $text-shadow;
 }
 
 .weather-icon {
@@ -21,9 +17,9 @@
 }
 
 .weather-type {
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin-bottom: 2rem;
-  color: $color-blue;
+  color: white;
 }
 //////////////////////////////
 // Celsius / Fahrenheit button
