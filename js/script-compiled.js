@@ -12,7 +12,7 @@ var init = function () {
   var pressure = document.querySelector('.weather-box__data__pressure');
   var windDegree = document.querySelector('.weather-box__data__wind-degree');
   var windSpeed = document.querySelector('.weather-box__data__wind-speed');
-  var btn = document.querySelector('input[type="checkbox"]');
+  var btn = document.querySelector('.weather-box__temp-btn');
   var pos = void 0,
       url = void 0;
   var degree = 'C'; // Celsius by default
@@ -21,6 +21,7 @@ var init = function () {
 
   btn.addEventListener('click', function () {
     degree === 'C' ? degree = 'F' : degree = 'C';
+    document.querySelector('label').classList.toggle('active');
     minTemp.textContent = convert(degree, minTemp.textContent);
     maxTemp.textContent = convert(degree, maxTemp.textContent);
   });

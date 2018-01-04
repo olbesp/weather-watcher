@@ -31,25 +31,23 @@
     justify-content: center;
   }
 
-  &__temp {
-    @include flexContainer;
-    @include board;
-  }
-
+  &__temp,
   &__data {
     @include flexContainer;
     @include board;
+    background-color: $color-grey-light-1;
+  }
+
+  &__map {
+    @include board;
   }
 }
 
-#map {
-  @include board;
-
-}
 .footer {
   flex: 1;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   padding: 3rem;
+  color: $color-blue;
 }
