@@ -38,7 +38,7 @@ const init = (function() {
 
   function setBackground() {
     const imgPath = `${checkWeather()}-${checkDayTime()}.jpeg`;
-    document.querySelector('.container').style.backgroundImage = `url(img/${imgPath})`;
+    document.querySelector('.bg-image').style.cssText = `background-image: url(img/${imgPath}); opacity: 1`;
   }
 
   function checkDayTime() {
