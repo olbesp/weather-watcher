@@ -82,20 +82,32 @@ var init = function () {
     console.log(res.data);
     icon.src = res.data.weather[0].icon;
     weather.textContent = res.data.weather[0].main;
-    minTemp.append(res.data.main.temp_min);
-    maxTemp.append(res.data.main.temp_max);
+    var dataTempMin = res.data.main.temp_min;
+    var dataTempMax = res.data.main.temp_max;
+    minTemp.textContent = '' + formatTemp(res.data.main.temp_min);
+    maxTemp.textContent = '' + formatTemp(res.data.main.temp_max);
     location.textContent = res.data.name;
+
     humidity.textContent += res.data.main.humidity;
     pressure.textContent += res.data.main.pressure;
     windDegree.textContent = getCardinalDirection(res.data.wind.deg);
     windSpeed.textContent = res.data.wind.speed.toFixed(1) + ' m/s';
   }
 
+  function formatTemp(temp) {
+    if (temp === 0) {
+      return temp.toString();
+    } else if (temp > 0) {
+      return '+' + temp.toString();
+    }
+    return '-' + temp.toString();
+  }
+
   function convert(degree, temp) {
     if (degree == "F") {
-      return Math.round(temp * 9 / 5 + 32);
+      return formatTemp(Math.round(Number(temp) * 9 / 5 + 32));
     }
-    return Math.round((temp - 32) * 5 / 9);
+    return formatTemp(Math.round((Number(temp) - 32) * 5 / 9));
   }
 
   function getCardinalDirection(angle) {
