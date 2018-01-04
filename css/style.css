@@ -115,7 +115,7 @@ body {
   width: 50px;
   height: 80px;
   background-color: #bbb;
-  border-radius: 4px;
+  border-radius: 5px;
   text-align: center; }
   .weather-box__temp-btn input {
     width: 100%;
@@ -142,19 +142,17 @@ body {
     background-image: -o-linear-gradient(top, #fff 0%, #ddd 50%, #fff 50%, #eee 100%);
     background-image: linear-gradient(top, #fff 0%, #ddd 50%, #fff 50%, #eee 100%);
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4), inset 0 -1px 1px #888, inset 0 -5px 1px #bbb, inset 0 -6px 0 white;
-    border-radius: 3px;
-    font: normal 11px Arial,Sans-Serif;
-    color: #666;
+    border-radius: 5px;
+    font-size: 1.3rem;
     text-shadow: 0 1px 0 white;
     cursor: text; }
-    .weather-box__temp-btn label.active {
-      color: #df770b; }
     .weather-box__temp-btn label::before {
       content: attr(data-off);
       position: absolute;
-      top: 6px;
+      top: 7px;
       right: 0;
       left: 0;
+      color: #df770b;
       z-index: 4; }
     .weather-box__temp-btn label::after {
       content: attr(data-on);
@@ -170,8 +168,9 @@ body {
   .weather-box__temp-btn input:checked:hover + label {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), inset 0 1px 7px -1px #ccc, inset 0 5px 1px #fafafa, inset 0 6px 0 white; }
   .weather-box__temp-btn input:checked + label::before {
+    color: #666;
     z-index: 1;
-    top: 11px; }
+    top: 10px; }
   .weather-box__temp-btn input:checked + label::after {
     bottom: 9px;
     color: #df770b;

@@ -30,7 +30,7 @@
   width: 50px;
   height: 80px;
   background-color: $color-grey-light-3;
-  border-radius: 4px;
+  border-radius: 5px;
   text-align: center;
 
   & input {
@@ -46,28 +46,24 @@
   & label {
     display: block;
     @include absPosition(1px, 1px, 1px, 1px);
-    background-image:-webkit-linear-gradient($background-gradient);
-    background-image:-moz-linear-gradient($background-gradient);
-    background-image:-ms-linear-gradient($background-gradient);
-    background-image:-o-linear-gradient($background-gradient);
-    background-image:linear-gradient($background-gradient);
+    background-image: -webkit-linear-gradient($background-gradient);
+    background-image: -moz-linear-gradient($background-gradient);
+    background-image: -ms-linear-gradient($background-gradient);
+    background-image: -o-linear-gradient($background-gradient);
+    background-image: linear-gradient($background-gradient);
     box-shadow: 0 2px 3px rgba(0,0,0,0.4),
       inset 0 -1px 1px #888,
       inset 0 -5px 1px #bbb,
       inset 0 -6px 0 white;
-    border-radius: 3px;
-    font: normal 11px Arial,Sans-Serif;
-    color: $color-grey-dark-1;
+    border-radius: 5px;
+    font-size: 1.3rem;
     text-shadow: 0 1px 0 white;
     cursor:text;
 
-    &.active {
-      color: $color-orange;
-    }
-
     &::before {
       content:attr(data-off);
-      @include absPosition(6px, 0, null, 0);
+      @include absPosition(7px, 0, null, 0);
+      color: $color-orange;
       z-index:4;
     }
 
@@ -94,8 +90,9 @@
   }
 
   & input:checked + label::before {
+    color: $color-grey-dark-1;
     z-index: 1;
-    top: 11px;
+    top: 10px;
   }
 
   & input:checked + label::after {

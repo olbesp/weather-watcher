@@ -10,7 +10,7 @@ const init = (function() {
   const pressure = document.querySelector('.weather-box__data__pressure');
   const windDegree = document.querySelector('.weather-box__data__wind-degree');
   const windSpeed = document.querySelector('.weather-box__data__wind-speed');
-  const btn = document.querySelector('.weather-box__temp-btn');
+  const btn = document.querySelector('input');
   let pos, url;
   let degree = 'C'; // Celsius by default
 
@@ -18,7 +18,6 @@ const init = (function() {
 
   btn.addEventListener('click', function() {
     degree === 'C' ? degree = 'F' : degree = 'C';
-    document.querySelector('label').classList.toggle('active');
     minTemp.textContent = convert(degree, minTemp.textContent);
     maxTemp.textContent = convert(degree, maxTemp.textContent);
   });
