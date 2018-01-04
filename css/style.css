@@ -24,6 +24,12 @@ body {
   background-color: #666;
   color: white; }
 
+.container {
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  height: 50vh; }
+
 .btn {
   position: relative;
   display: inline-block;

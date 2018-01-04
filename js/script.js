@@ -2,6 +2,7 @@ const init = (function() {
 
   const dataBox = document.getElementById('data');
   const icon = document.querySelector('.weather-icon');
+  const weather = document.querySelector('.weather');
   const minTemp = document.querySelector('.temp__min');
   const maxTemp = document.querySelector('.temp__max');
   const location = document.querySelector('.location');
@@ -12,6 +13,27 @@ const init = (function() {
   const btn = document.querySelector('input[type="checkbox"]');
   let pos, url;
   let degree = 'C'; // Celsius by default
+
+  const bgImages = {
+    day: [
+      'clear-day.jpeg',
+      'clouds-day.jpeg',
+      'fog-day.jpeg',
+      'rain-day.jpeg',
+      'snow-day.jpeg',
+      'storm-day.jpeg'
+    ],
+    night: [
+      'clear-night.jpeg',
+      'clouds-night.jpeg',
+      'fog-night.jpeg',
+      'rain-night.jpeg',
+      'snow-night.jpeg',
+      'storm-night.jpeg'
+    ]
+  };
+
+  window.addEventListener('load', setBackground);
 
   btn.addEventListener('click', function() {
     degree === 'C' ? degree = 'F' : degree = 'C';
@@ -33,6 +55,22 @@ const init = (function() {
     dataBox.innerHTML = "Geolocation is not supported by this browser.";
   }
 
+  function setBackground() {
+    const imgPath = `${checkWeather()}-${checkDayTime()}.jpeg`;
+    document.querySelector('.container').style.backgroundImage = `url(img/${imgPath})`;
+  }
+
+  function checkDayTime() {
+    const time = new Date();
+    if (time.getHours() > 5 && time.getHours() < 21) {
+      return 'day';
+    }
+    return 'night';
+  }
+
+  function checkWeather() {
+    return weather.textContent.toLowerCase();
+  }
 
   function showError(error) {
     switch(error.code) {
@@ -60,6 +98,7 @@ const init = (function() {
   function updateDOM(res) {
     console.log(res.data);
     icon.src = res.data.weather[0].icon;
+    weather.textContent = res.data.weather[0].main;
     minTemp.append(res.data.main.temp_min);
     maxTemp.append(res.data.main.temp_max);
     location.textContent = res.data.name;

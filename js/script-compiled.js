@@ -4,6 +4,7 @@ var init = function () {
 
   var dataBox = document.getElementById('data');
   var icon = document.querySelector('.weather-icon');
+  var weather = document.querySelector('.weather');
   var minTemp = document.querySelector('.temp__min');
   var maxTemp = document.querySelector('.temp__max');
   var location = document.querySelector('.location');
@@ -15,6 +16,13 @@ var init = function () {
   var pos = void 0,
       url = void 0;
   var degree = 'C'; // Celsius by default
+
+  var bgImages = {
+    day: ['clear-day.jpeg', 'clouds-day.jpeg', 'fog-day.jpeg', 'rain-day.jpeg', 'snow-day.jpeg', 'storm-day.jpeg'],
+    night: ['clear-night.jpeg', 'clouds-night.jpeg', 'fog-night.jpeg', 'rain-night.jpeg', 'snow-night.jpeg', 'storm-night.jpeg']
+  };
+
+  window.addEventListener('load', setBackground);
 
   btn.addEventListener('click', function () {
     degree === 'C' ? degree = 'F' : degree = 'C';
@@ -34,6 +42,23 @@ var init = function () {
   } else {
     // Browser doesn't support Geolocation
     dataBox.innerHTML = "Geolocation is not supported by this browser.";
+  }
+
+  function setBackground() {
+    var imgPath = checkWeather() + '-' + checkDayTime() + '.jpeg';
+    document.querySelector('.container').style.backgroundImage = 'url(img/' + imgPath + ')';
+  }
+
+  function checkDayTime() {
+    var time = new Date();
+    if (time.getHours() > 5 && time.getHours() < 21) {
+      return 'day';
+    }
+    return 'night';
+  }
+
+  function checkWeather() {
+    return weather.textContent.toLowerCase();
   }
 
   function showError(error) {
@@ -60,6 +85,7 @@ var init = function () {
   function updateDOM(res) {
     console.log(res.data);
     icon.src = res.data.weather[0].icon;
+    weather.textContent = res.data.weather[0].main;
     minTemp.append(res.data.main.temp_min);
     maxTemp.append(res.data.main.temp_max);
     location.textContent = res.data.name;
