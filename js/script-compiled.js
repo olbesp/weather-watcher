@@ -11,11 +11,12 @@ var init = function () {
   var pressure = document.querySelector('.pressure');
   var windDegree = document.querySelector('.wind__degree');
   var windSpeed = document.querySelector('.wind__speed');
-  var pos = void 0;
-  var url = void 0;
+  var btn = document.querySelector('input[type="checkbox"]');
+  var pos = void 0,
+      url = void 0;
   var degree = 'C'; // Celsius by default
 
-  document.querySelector('.btn').addEventListener('click', function () {
+  btn.addEventListener('click', function () {
     degree === 'C' ? degree = 'F' : degree = 'C';
     minTemp.textContent = convert(degree, minTemp.textContent);
     maxTemp.textContent = convert(degree, maxTemp.textContent);
@@ -29,8 +30,6 @@ var init = function () {
       };
       url = 'https://fcc-weather-api.glitch.me/api/current?lat=' + pos.lat + '&lon=' + pos.lng;
       sendRequest();
-      console.log(url);
-      console.log(position);
     }, showError);
   } else {
     // Browser doesn't support Geolocation
@@ -89,11 +88,6 @@ var init = function () {
     }
     return arrows['north'];
   }
-  // function appendComment(comment) {
-  //   var newP = document.createElement('p');
-  //   newP.innerText = comment.email;
-  //   section.appendChild(newP);
-  // }
 
   function handleErrors(err) {
     if (err.response) {
@@ -105,5 +99,3 @@ var init = function () {
     }
   }
 }();
-
-// AIzaSyCNnMnCBQZ9HexzA0gigneirn4rWf-FeXU

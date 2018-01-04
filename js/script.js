@@ -9,10 +9,11 @@ const init = (function() {
   const pressure = document.querySelector('.pressure');
   const windDegree = document.querySelector('.wind__degree');
   const windSpeed = document.querySelector('.wind__speed');
+  const btn = document.querySelector('input[type="checkbox"]');
   let pos, url;
   let degree = 'C'; // Celsius by default
 
-  document.querySelector('.btn').addEventListener('click', function() {
+  btn.addEventListener('click', function() {
     degree === 'C' ? degree = 'F' : degree = 'C';
     minTemp.textContent = convert(degree, minTemp.textContent);
     maxTemp.textContent = convert(degree, maxTemp.textContent);
