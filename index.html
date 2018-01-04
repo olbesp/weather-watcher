@@ -57,11 +57,13 @@
         <div id="map" class="weather-box__map"></div>
       </div>
     </div>
-    <footer class="footer">Made by Oleksii Bespalko using <a href="https://fcc-weather-api.glitch.me/">freeCodeCamp Weather API</a> and <a href="https://developers.google.com/maps/">Google Maps API</a></footer>
+    <footer class="footer">
+      Made by Oleksii Bespalko using
+      <a href="https://fcc-weather-api.glitch.me/" target="_blank">freeCodeCamp Weather API</a>
+      and
+      <a href="https://developers.google.com/maps/" target="_blank">Google Maps API</a>
+    </footer>
   </div>
-  <!-- build:js js/main.js-->
-  <script src="node_modules/axios/dist/axios.min.js"></script>
-  <script src="js/script-compiled.js"></script>
   <script>
     let map, infoWindow, pos;
     function initMap() {
@@ -105,6 +107,9 @@
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNnMnCBQZ9HexzA0gigneirn4rWf-FeXU&callback=initMap">
   </script>
+  <!-- build:js js/main.js-->
+  <script src="node_modules/axios/dist/axios.min.js"></script>
+  <script src="js/script-compiled.js"></script>
   <!-- endbuild -->
 </body>
 </html>

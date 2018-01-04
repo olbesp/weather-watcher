@@ -50,10 +50,6 @@
   & label {
     display: block;
     @include absPosition(1px, 1px, 1px, 1px);
-    background-image: -webkit-linear-gradient($background-gradient);
-    background-image: -moz-linear-gradient($background-gradient);
-    background-image: -ms-linear-gradient($background-gradient);
-    background-image: -o-linear-gradient($background-gradient);
     background-image: linear-gradient($background-gradient);
     box-shadow: 0 2px 3px rgba(0,0,0,0.4),
       inset 0 -1px 1px #888,
@@ -81,7 +77,7 @@
 
 
   & input:checked + label {
-    background-image: linear-gradient(top,
+    background-image: linear-gradient(to bottom,
       $color-grey-light-1 0%,
       $color-grey-light-2 50%,
       white 50%,
