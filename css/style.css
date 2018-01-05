@@ -92,7 +92,8 @@ body {
         margin-bottom: 2rem; } }
 
 .weather-item {
-  font-size: 2.5rem; }
+  font-size: 2rem;
+  text-transform: lowercase; }
 
 .footer {
   flex: 1;

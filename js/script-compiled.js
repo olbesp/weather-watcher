@@ -79,11 +79,11 @@ var init = function () {
     //console.log(res.data);
     icon.src = res.data.weather[0].icon;
     weather.textContent = res.data.weather[0].main;
-    minTemp.textContent = '' + formatTemp(res.data.main.temp_min);
-    maxTemp.textContent = '' + formatTemp(res.data.main.temp_max);
+    minTemp.innerHTML = '' + formatTemp(res.data.main.temp_min);
+    maxTemp.innerHTML = '' + formatTemp(res.data.main.temp_max);
     location.textContent = res.data.name;
-    humidity.textContent += res.data.main.humidity;
-    pressure.textContent += res.data.main.pressure;
+    humidity.textContent = res.data.main.humidity + '%';
+    pressure.textContent = res.data.main.pressure + 'mb\u2191';
     windDegree.textContent = getCardinalDirection(res.data.wind.deg);
     windSpeed.textContent = res.data.wind.speed.toFixed(1) + ' m/s';
     setBackground();
@@ -91,18 +91,18 @@ var init = function () {
 
   function formatTemp(temp) {
     if (temp === 0) {
-      return temp.toString();
+      return temp.toString() + '\u02DA';
     } else if (temp > 0) {
-      return '+' + temp.toString();
+      return '+' + temp.toString() + '\u02DA';
     }
-    return '-' + temp.toString();
+    return '-' + temp.toString() + '\u02DA';
   }
 
   function convert(degree, temp) {
     if (degree == "F") {
-      return formatTemp(Math.round(Number(temp) * 9 / 5 + 32));
+      return formatTemp(Math.round(parseInt(temp) * 9 / 5 + 32));
     }
-    return formatTemp(Math.round((Number(temp) - 32) * 5 / 9));
+    return formatTemp(Math.round((parseInt(temp) - 32) * 5 / 9));
   }
 
   function getCardinalDirection(angle) {
