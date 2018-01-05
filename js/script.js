@@ -10,6 +10,7 @@ const init = (function() {
   const pressure = document.querySelector('.weather-box__data__pressure');
   const windDegree = document.querySelector('.weather-box__data__wind-degree');
   const windSpeed = document.querySelector('.weather-box__data__wind-speed');
+  const visibility = document.querySelector('.weather-box__data__visibility');
   const btn = document.querySelector('input');
   let pos, url;
   let degree = 'C'; // Celsius by default
@@ -18,6 +19,9 @@ const init = (function() {
     degree === 'C' ? degree = 'F' : degree = 'C';
     minTemp.textContent = convert(degree, minTemp.textContent);
     maxTemp.textContent = convert(degree, maxTemp.textContent);
+    pressure.textContent = convertUnits(pressure, 'mb↑', 'in↑', 0.02953);
+    windSpeed.textContent = convertUnits(windSpeed, 'km/h', 'mph', 0.62);
+    visibility.textContent = convertUnits(visibility, 'km', 'mi', 0.62);
   });
 
   if (navigator.geolocation) {
@@ -75,16 +79,17 @@ const init = (function() {
   }
 
   function updateDOM(res) {
-    //console.log(res.data);
+    console.log(res.data);
     icon.src = res.data.weather[0].icon;
     weather.textContent = res.data.weather[0].main;
     minTemp.innerHTML = `${formatTemp(res.data.main.temp_min)}`;
     maxTemp.innerHTML = `${formatTemp(res.data.main.temp_max)}`;
     location.textContent = res.data.name;
     humidity.textContent = `${res.data.main.humidity}%`;
-    pressure.textContent = `${res.data.main.pressure}mb↑`;
+    pressure.textContent = `${res.data.main.pressure.toFixed(1)}mb↑`;
     windDegree.textContent = getCardinalDirection(res.data.wind.deg);
-    windSpeed.textContent = `${res.data.wind.speed.toFixed(1)} m/s`;
+    windSpeed.textContent = `${(res.data.wind.speed * 3600 / 1000).toFixed(1)}km/h`;
+    visibility.textContent = `${(res.data.visibility / 1000).toFixed(1)}km`;
     setBackground();
 
   }
@@ -103,6 +108,17 @@ const init = (function() {
       return formatTemp(Math.round(parseInt(temp) * 9 / 5 + 32));
     }
     return formatTemp(Math.round((parseInt(temp) - 32) * 5 / 9));
+  }
+
+  function convertUnits(target, fromUnit, toUnit, oneTargetUnit) {
+    // target - HTML element where to replace units of measurement
+    // fromUnit - String that will be replaced: kilometers to miles etc.
+    // toUnit - String to replace to the fromUnit place: miles instead of kilometers
+    // oneTargetUnit - Number equal to 1 unit of target unit of measurement: 1km = 0.62m
+    if (target.textContent.indexOf(fromUnit) !== -1) {
+      return `${(parseFloat(target.textContent) * oneTargetUnit).toFixed(1)}${toUnit}`;
+    }
+    return `${(parseFloat(target.textContent) / oneTargetUnit).toFixed(1)}${fromUnit}`;
   }
 
   function getCardinalDirection(angle) {
