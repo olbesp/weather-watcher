@@ -69,6 +69,8 @@ const init = (function() {
       case error.UNKNOWN_ERROR:
         dataBox.innerHTML = "An unknown error occurred."
         break;
+      default:
+        dataBox.innerHTML = error;
     }
   }
 
@@ -95,12 +97,10 @@ const init = (function() {
   }
 
   function formatTemp(temp) {
-    if (temp === 0) {
+    if (temp <= 0) {
       return `${temp.toString()}˚`;
-    } else if (temp > 0) {
-      return `+${temp.toString()}˚`;
     }
-    return `-${temp.toString()}˚`;
+    return `+${temp.toString()}˚`;
   }
 
   function convert(degree, temp) {
