@@ -3,7 +3,6 @@
 var init = function () {
 
   var dataBox = document.getElementById('data');
-  var icon = document.querySelector('.weather-icon');
   var weather = document.querySelector('.weather-type');
   var minTemp = document.querySelector('.weather-box__temp-min');
   var maxTemp = document.querySelector('.weather-box__temp-max');
@@ -83,7 +82,6 @@ var init = function () {
 
   function updateDOM(res) {
     console.log(res.data);
-    icon.src = res.data.weather[0].icon;
     weather.textContent = res.data.weather[0].main;
     minTemp.innerHTML = '' + formatTemp(res.data.main.temp_min);
     maxTemp.innerHTML = '' + formatTemp(res.data.main.temp_max);
