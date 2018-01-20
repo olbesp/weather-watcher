@@ -34,6 +34,7 @@ var init = function () {
       };
       url = 'https://fcc-weather-api.glitch.me/api/current?lat=' + pos.lat + '&lon=' + pos.lng;
       sendRequest();
+      setInterval(sendRequest, 1000 * 60 * 60);
     }, showError);
   } else {
     // Browser doesn't support Geolocation
@@ -81,7 +82,7 @@ var init = function () {
   }
 
   function updateDOM(res) {
-    console.log(res.data);
+    //console.log(res.data);
     weather.textContent = res.data.weather[0].main;
     minTemp.innerHTML = '' + formatTemp(res.data.main.temp_min);
     maxTemp.innerHTML = '' + formatTemp(res.data.main.temp_max);
