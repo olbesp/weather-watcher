@@ -5,8 +5,8 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 const map = withScriptjs(withGoogleMap((props) =>
   <GoogleMap
     defaultZoom={12}
-    defaultCenter={{ lat: -34, lng: 150.644 }}>
-    {props.isMarkerShown && <Marker position={{ lat: -34, lng: 150.644 }} />}
+    defaultCenter={{ lat: props.lat, lng: props.lng }}>
+    {props.isMarkerShown && <Marker position={{ lat: props.lat, lng: props.lng }} />}
   </GoogleMap>
 ))
 
