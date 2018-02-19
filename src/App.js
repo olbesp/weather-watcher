@@ -21,10 +21,6 @@ class App extends Component {
     });
   }
 
-  updateMapCenter = () => {
-
-  }
-
   componentDidMount() {
     this.getLocation();
   }
