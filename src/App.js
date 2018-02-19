@@ -5,8 +5,8 @@ import Map from './components/Map/Map';
 class App extends Component {
   state = {
     userLocation: {
-      lat: 50,
-      lng: 50
+      lat: null,
+      lng: null
     }
   }
 
@@ -21,6 +21,10 @@ class App extends Component {
     });
   }
 
+  updateMapCenter = () => {
+
+  }
+
   componentDidMount() {
     this.getLocation();
   }
@@ -28,7 +32,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Map lat={this.state.userLocation.lat} lng={this.state.userLocation.lng} isMarkerShown />
+        <Map 
+          position={{ ...this.state.userLocation }}
+          isMarkerShown />
       </div>
     );
   }

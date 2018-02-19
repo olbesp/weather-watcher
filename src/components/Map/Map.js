@@ -15,10 +15,10 @@ const map = compose(
   withGoogleMap,
 )((props) => (
   <GoogleMap
-    defaultZoom={2}
-    defaultCenter={{ lat: props.lat, lng: props.lng }}
+    defaultZoom={12}
+    center={props.position}
   >
-    {props.isMarkerShown && <Marker position={{ lat: props.lat, lng: props.lng }} />}
+    {props.isMarkerShown && <Marker position={props.position} />}
   </GoogleMap>
 ));
 
