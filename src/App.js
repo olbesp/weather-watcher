@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Background from './components/Background/Background';
 import Map from './components/Map/Map';
 
 class App extends Component {
@@ -28,6 +29,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Background />
         <Map 
           position={{ ...this.state.userLocation }}
           isMarkerShown />
