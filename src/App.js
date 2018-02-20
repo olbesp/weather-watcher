@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import axios from 'axios';
 import Background from './components/Background/Background';
+import WeatherBox from './containers/WeatherBox/WeatherBox';
 import Map from './components/Map/Map';
 
 class App extends Component {
@@ -10,8 +10,7 @@ class App extends Component {
       lat: 0,
       lng: 0
     },
-    timesOfDay: 'night',
-    weatherData: ''
+    timesOfDay: 'night'
   }
 
   checkDayTime = () => {
@@ -36,35 +35,17 @@ class App extends Component {
     });
   }
 
-  getWeather = () => {
-    const url = `https://fcc-weather-api.glitch.me/api/current?lat=${this.state.userLocation.lat}&lon=${this.state.userLocation.lng}`;
-    axios.get(url)
-      .then(response => {
-        // console.log(response.data.coord);
-        // console.log(this.state);
-        this.setState({weatherData: response.data});
-        console.log(this.state);
-      })
-      .catch(console.log('error'));
-  }
-
   componentDidMount() {
     this.checkDayTime();
     this.getLocation();
   }
 
-  componentDidUpdate() {
-    this.getWeather();
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.state.weatherData === nextState.weatherData;
-  }
-
   render() {
     return (
       <div>
-        <Background time={this.state.timesOfDay} currentWeather="snow" />
+        <Background time={this.state.timesOfDay} currentWeather="snow">
+          <WeatherBox coordinates={{ ...this.state.userLocation }} />
+        </Background>
         <Map 
           position={{ ...this.state.userLocation }}
           isMarkerShown />

@@ -46,6 +46,7 @@ const background = (props) => {
 
   return (
     <div style={styles}>
+      {props.children}
     </div>
   );
 };
