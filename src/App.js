@@ -32,6 +32,10 @@ class App extends Component {
     });
   }
 
+  getWeather = () => {
+    const url = `https://fcc-weather-api.glitch.me/api/current?lat=${this.state.userLocation.lat}&lon=${this.state.userLocation.lng}`;
+  }
+
   componentDidMount() {
     this.checkDayTime();
     this.getLocation();
