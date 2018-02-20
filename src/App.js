@@ -8,6 +8,16 @@ class App extends Component {
     userLocation: {
       lat: 0,
       lng: 0
+    },
+    timesOfDay: 'night'
+  }
+
+  checkDayTime = () => {
+    const time = new Date();
+    if (time.getHours() > 5 && time.getHours() < 21) {
+      this.setState({ timesOfDay: 'day' });
+    } else {
+      this.setState({ timesOfDay: 'night' });
     }
   }
 
@@ -23,13 +33,14 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.checkDayTime();
     this.getLocation();
   }
 
   render() {
     return (
       <div>
-        <Background time="day" currentWeather="snow" />
+        <Background time={this.state.timesOfDay} currentWeather="snow" />
         <Map 
           position={{ ...this.state.userLocation }}
           isMarkerShown />
