@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import axios from 'axios';
 import Background from './components/Background/Background';
 import Map from './components/Map/Map';
 
@@ -9,7 +10,8 @@ class App extends Component {
       lat: 0,
       lng: 0
     },
-    timesOfDay: 'night'
+    timesOfDay: 'night',
+    weatherData: ''
   }
 
   checkDayTime = () => {
@@ -23,10 +25,12 @@ class App extends Component {
 
   getLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
-      this.setState({ 
-        userLocation: {
-          lat: position.coords.latitude, 
-          lng: position.coords.longitude
+      this.setState((prevState) => {
+        return {
+          userLocation: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          }
         }
       });
     });
@@ -34,11 +38,27 @@ class App extends Component {
 
   getWeather = () => {
     const url = `https://fcc-weather-api.glitch.me/api/current?lat=${this.state.userLocation.lat}&lon=${this.state.userLocation.lng}`;
+    axios.get(url)
+      .then(response => {
+        // console.log(response.data.coord);
+        // console.log(this.state);
+        this.setState({weatherData: response.data});
+        console.log(this.state);
+      })
+      .catch(console.log('error'));
   }
 
   componentDidMount() {
     this.checkDayTime();
     this.getLocation();
+  }
+
+  componentDidUpdate() {
+    this.getWeather();
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.weatherData === nextState.weatherData;
   }
 
   render() {
