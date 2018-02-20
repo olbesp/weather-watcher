@@ -6,8 +6,8 @@ import Map from './components/Map/Map';
 class App extends Component {
   state = {
     userLocation: {
-      lat: null,
-      lng: null
+      lat: 0,
+      lng: 0
     }
   }
 
@@ -29,7 +29,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Background />
+        <Background time="day" currentWeather="snow" />
         <Map 
           position={{ ...this.state.userLocation }}
           isMarkerShown />
