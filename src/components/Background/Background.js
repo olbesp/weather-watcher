@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import ClearDayImage from '../../assets/images/clear-day.jpeg';
 import ClearNightImage from '../../assets/images/clear-night.jpeg';
@@ -36,19 +36,38 @@ const backgroundImages = {
   }
 };
 
-background = (props) => {
-  const styles = {
-    height: '50vh',
-    backgroundImage: `url(${backgroundImages[props.time][props.currentWeather]})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'bottom'
-  };
+class Background extends Component {
+  state = {
+    styles: {
+      height: '50vh',
+      backgroundImage: '',
+      backgroundSize: 'cover',
+      backgroundPosition: 'bottom'
+    }
+  }
 
-  return (
-    <div style={styles}>
-      {props.children}
-    </div>
-  );
-};
+  setBackgroundImage = () => {
+    this.setState({ styles: {
+      height: '50vh',
+      backgroundImage: `url(${backgroundImages[this.props.time][this.props.currentWeather]})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'bottom'
+    }});
+  }
 
-export default background;
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props !== prevProps && this.props.currentWeather) {
+      this.setBackgroundImage();
+    }
+  }
+
+  render() {
+    return (
+      <div style={this.state.styles}>
+        {this.props.children}
+      </div>
+    );
+  }
+}
+
+export default Background;

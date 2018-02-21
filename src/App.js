@@ -28,14 +28,12 @@ class App extends Component {
         lng: position.coords.longitude 
       };
       this.setState({ userLocation });
-      console.log(this.state, 'getLocation')
     });
   }
 
   componentDidMount() {
     this.checkDayTime();
     this.getLocation();
-    console.log(this.state, 'componentDidMount');
   }
 
   render() {
