@@ -37,9 +37,9 @@ class WeatherBox extends Component {
 
   formatTemperatureData = (temp) => {
     if (temp <= 0) {
-      return `${temp.toString()}˚`;
+      return `${temp.toString()}˚C`;
     }
-    return `+${temp.toString()}˚`;
+    return `+${temp.toString()}˚C`;
   }
 
   getCardinalDirection = (angle) => {
@@ -96,9 +96,9 @@ class WeatherBox extends Component {
               />
               <DataBox indexes={['humidity', 'pressure', 'visibility']}
                 values={[
-                  this.state.weatherData.humidity,
-                  this.state.weatherData.pressure,
-                  this.state.weatherData.visibility
+                  `${this.state.weatherData.humidity}%`,
+                  `${this.state.weatherData.pressure.toFixed(1)}mb↑`,
+                  `${(this.state.weatherData.visibility / 1000).toFixed(1)}km`
                 ]}
               />
             </div>
