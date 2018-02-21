@@ -4,6 +4,7 @@ import axios from 'axios';
 import Aux from '../../hoc/Aux';
 import Background from '../../components/Background/Background';
 import DataBox from '../../components/DataBox/DataBox';
+import Header from '../../components/Header/Header';
 
 class WeatherBox extends Component {
   state = {
@@ -38,13 +39,18 @@ class WeatherBox extends Component {
   render() {
     return (
       <Aux>
-        <Background time={this.props.time} currentWeather={this.state.weatherData.weatherType} />
-        <DataBox>
+        <Background time={this.props.time} currentWeather={this.state.weatherData.weatherType}>
+          <Header
+            location={this.state.weatherData.locationTitle}
+            description={this.state.weatherData.weatherDescription}
+          />
+          <DataBox>
 
-        </DataBox>
-        <DataBox>
+          </DataBox>
+          <DataBox>
 
-        </DataBox>
+          </DataBox>
+        </Background>
       </Aux>
     );
   }
