@@ -39,7 +39,7 @@ const backgroundImages = {
 class Background extends Component {
   state = {
     styles: {
-      height: '50vh',
+      height: '60vh',
       backgroundImage: 'linear-gradient(rgba(65, 92, 182, 0.5), rgba(27, 172, 116, 0.5))',
       backgroundSize: 'cover',
       backgroundPosition: 'bottom'
@@ -48,7 +48,7 @@ class Background extends Component {
 
   setBackgroundImage = () => {
     this.setState({ styles: {
-      height: '50vh',
+      height: '60vh',
       backgroundImage: `linear-gradient(rgba(65, 92, 182, 0.5), rgba(27, 172, 116, 0.5)), url(${backgroundImages[this.props.time][this.props.currentWeather]})`,
       backgroundSize: 'cover',
       backgroundPosition: 'bottom'
