@@ -30,6 +30,10 @@ class WeatherBox extends Component {
       });
   }
 
+  checkLocalData = () => {
+    return this.state.weatherData.locationTitle !== 'Earth';
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.props !== prevProps) {
       this.getWeather();
@@ -44,15 +48,15 @@ class WeatherBox extends Component {
             location={this.state.weatherData.locationTitle}
             description={this.state.weatherData.weatherDescription}
           />
-          <DataBox>
-
-          </DataBox>
-          <DataBox>
-
-          </DataBox>
-        </Background>
+          {
+            this.state.weatherData.temperature && this.checkLocalData() &&
+            <DataBox indexes={['min', 'max']}
+              values={[this.state.weatherData.temperature.min, this.state.weatherData.temperature.max]}
+            />
+          }
+        </Background>        
       </Aux>
-    );
+    );    
   }
 }
 

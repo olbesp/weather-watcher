@@ -2,8 +2,8 @@ import React from 'react';
 
 const index = (props) => (
   <div>
-    <h3>{props.indexType}</h3>
-    <span>{props.value}</span>
+    <h3>{props.type}</h3>
+    <span>{props.value ? props.value : null}</span>
   </div>
 );
 

@@ -1,7 +1,12 @@
 import React from 'react';
 
+import Index from '../Index/Index';
+
 const dataBox = (props) => (
-  <div>{props.children}</div>
+  <div>
+    <Index type={props.indexes[0]} value={props.values[0]} />
+    <Index type={props.indexes[1]} value={props.values[0]} />
+  </div>
 );
 
 export default dataBox;
