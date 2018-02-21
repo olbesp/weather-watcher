@@ -1,5 +1,6 @@
 import React from 'react';
 
+import styles from './DataBox.css';
 import Index from '../Index/Index';
 
 const dataBox = (props) => {
@@ -7,7 +8,7 @@ const dataBox = (props) => {
     return <Index type={index} value={props.values[i]} key={i} />
   });
   return (
-    <div>
+    <div className={styles.DataBox}>
       {weatherIndexes}
     </div>
   );

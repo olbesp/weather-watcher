@@ -1,0 +1,6 @@
+.DataBox {
+  background-image: linear-gradient(rgb(34, 96, 138), rgb(13, 163, 113));
+  width: 40%;
+  padding-bottom: 1rem;
+  box-shadow: 0 1rem 3rem rgba(0,0,0,.5);
+}
