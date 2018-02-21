@@ -14,7 +14,7 @@ class App extends Component {
 
   checkDayTime = () => {
     const time = new Date();
-    if (time.getHours() > 5 && time.getHours() < 21) {
+    if (time.getHours() > 5 && time.getHours() < 20) {
       this.setState({ timesOfDay: 'day' });
     } else {
       this.setState({ timesOfDay: 'night' });
