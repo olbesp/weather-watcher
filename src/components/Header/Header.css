@@ -1,0 +1,14 @@
+.Header {
+  text-align: center;
+  text-transform: uppercase;
+  padding: 2rem 0;
+  color: white;
+}
+
+.AppTitle { 
+  font-size: 2rem;
+  font-family: 'Bellefair', serif;
+  margin-bottom: 1rem;
+}
+.Header h3 { font-size: 1.5rem; }
+.Header h4 { font-size: 1.25rem; }

@@ -1,10 +1,19 @@
 import React from 'react';
 
+import styles from './Header.css';
+import Aux from '../../hoc/Aux';
+
 const header = (props) => (
-  <header>
-    <h1>Weather Watcher</h1>
-    <h3>{props.location !== 'Earth' ? props.location : null}</h3>
-    <h4>{typeof props.description === 'string' ? props.description : null}</h4>
+  <header className={styles.Header}>
+    <h1 className={styles.AppTitle}>Weather Watcher</h1>
+    {
+      props.location === 'Earth' || typeof props.description !== 'string' ? <div></div> :
+      <Aux>
+        <h3>{props.location}</h3>
+        <h4>{props.description}</h4>
+      </Aux>
+    }
+    
   </header>
 );
 
