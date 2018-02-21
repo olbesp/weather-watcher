@@ -36,7 +36,7 @@ const backgroundImages = {
   }
 };
 
-const background = (props) => {
+background = (props) => {
   const styles = {
     height: '50vh',
     backgroundImage: `url(${backgroundImages[props.time][props.currentWeather]})`,

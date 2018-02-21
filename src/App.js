@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import Background from './components/Background/Background';
 import WeatherBox from './containers/WeatherBox/WeatherBox';
 import Map from './components/Map/Map';
 
@@ -24,31 +23,29 @@ class App extends Component {
 
   getLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
-      this.setState((prevState) => {
-        return {
-          userLocation: {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          }
-        }
-      });
+      const userLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude 
+      };
+      this.setState({ userLocation });
+      console.log(this.state, 'getLocation')
     });
   }
 
   componentDidMount() {
     this.checkDayTime();
     this.getLocation();
+    console.log(this.state, 'componentDidMount');
   }
 
   render() {
     return (
       <div>
-        <Background time={this.state.timesOfDay} currentWeather="snow">
-          <WeatherBox coordinates={{ ...this.state.userLocation }} />
-        </Background>
+        <WeatherBox coordinates={{ ...this.state.userLocation }} time={this.state.timesOfDay} />
         <Map 
           position={{ ...this.state.userLocation }}
-          isMarkerShown />
+          isMarkerShown 
+        />
       </div>
     );
   }

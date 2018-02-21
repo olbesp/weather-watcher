@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 import axios from 'axios';
+import Aux from '../../hoc/Aux';
+import Background from '../../components/Background/Background';
 
 class WeatherBox extends Component {
   state = {
@@ -13,20 +15,21 @@ class WeatherBox extends Component {
       .then(response => {
         this.setState({ weatherData: response.data });
         console.log(this.state);
-      })
-      .catch(console.log('error'));
+      });
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.state.weatherData === nextState.weatherData;
-  }
-
-  componentDidUpdate() {
-    this.getWeather();
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props !== prevProps) {
+      this.getWeather();
+    }
   }
 
   render() {
-    return <div></div>
+    return (
+      <Aux>
+        <Background time={this.props.time} currentWeather={this.state.weatherData.weather[0].main.toLowerCase()} />
+      </Aux>
+    );
   }
 }
 
