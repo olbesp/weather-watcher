@@ -109,6 +109,7 @@ class WeatherBox extends Component {
               />
             </div>
           }
+          <p style={{textAlign: 'center', color: 'white', paddingBottom: '2rem'}}>Made by Oleksii Bespalko using FreeCodeCamp Weather API and Google Maps API</p>
         </Background>        
       </Aux>
     );    
