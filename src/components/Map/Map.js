@@ -17,7 +17,7 @@ const map = compose(
   withGoogleMap,
 )((props) => (
   <GoogleMap
-    defaultZoom={15}
+    defaultZoom={12}
     center={props.position}
   >
     {props.isMarkerShown && <Marker position={props.position} />}

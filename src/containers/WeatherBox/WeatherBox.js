@@ -19,7 +19,6 @@ class WeatherBox extends Component {
     const url = `https://fcc-weather-api.glitch.me/api/current?lat=${this.props.coordinates.lat}&lon=${this.props.coordinates.lng}`;
     axios.get(url)
       .then(response => {
-        console.log(response.data);
         const weatherData = {
           locationTitle: response.data.name,
           weatherType: response.data.weather[0].main.toLowerCase(),
@@ -31,7 +30,6 @@ class WeatherBox extends Component {
           visibility: response.data.visibility
         };
         this.setState({ weatherData });
-        console.log(this.state);
       });
   }
 

@@ -45,7 +45,7 @@ class Background extends Component {
 
   setBackgroundImage = () => {
     this.setState({
-      backgroundImage: `linear-gradient(rgba(65, 92, 182, 0.5), rgba(27, 172, 116, 0.5)), url(${backgroundImages[this.props.time][this.props.currentWeather]})`
+      backgroundImage: `linear-gradient(rgba(65, 92, 182, 0.4), rgba(27, 172, 116, 0.4)), url(${backgroundImages[this.props.time][this.props.currentWeather]})`
     });
   }
 
@@ -62,7 +62,7 @@ class Background extends Component {
     if (this.props.time && this.props.currentWeather) {
       backgroundComponent = (
         <div className={styles.Background} style={{
-          backgroundImage: 'linear-gradient(rgba(65, 92, 182, 0.5), rgba(27, 172, 116, 0.5))'
+          backgroundImage: 'linear-gradient(rgba(65, 92, 182, 0.4), rgba(27, 172, 116, 0.4))'
         }}>{this.props.children}
         </div>
       );
