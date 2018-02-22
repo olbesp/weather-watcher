@@ -1,6 +1,11 @@
 .DataBox {
-  background-image: linear-gradient(rgb(34, 96, 138), rgb(13, 163, 113));
-  width: 40%;
-  padding-bottom: 1rem;
+  background-image: linear-gradient(rgba(34, 96, 138, 0.6), rgba(13, 163, 113, .6));
+  width: 80%;
+  height: 25rem;
+  margin-bottom: 2rem;
   box-shadow: 0 1rem 3rem rgba(0,0,0,.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }

@@ -1,4 +1,6 @@
 import React from 'react';
+
+import styles from './Map.css';
 import { compose, withProps } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
@@ -8,7 +10,7 @@ const map = compose(
   withProps({
     googleMapURL: `https://maps.googleapis.com/maps/api/js?${apiKey}&v=3.exp&libraries=geometry,drawing,places`,
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `300px`, width: '300px' }} />,
+    containerElement: <div className={styles.Map} />,
     mapElement: <div style={{ height: `100%` }} />,
   }),
   withScriptjs,
