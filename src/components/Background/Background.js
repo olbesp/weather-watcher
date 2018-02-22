@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import styles from './Background.css';
+
 import ClearDayImage from '../../assets/images/clear-day.jpeg';
 import ClearNightImage from '../../assets/images/clear-night.jpeg';
 import CloudsDayImage from '../../assets/images/clouds-day.jpeg';
@@ -38,21 +40,13 @@ const backgroundImages = {
 
 class Background extends Component {
   state = {
-    styles: {
-      height: '60vh',
-      backgroundImage: 'linear-gradient(rgba(65, 92, 182, 0.5), rgba(27, 172, 116, 0.5))',
-      backgroundSize: 'cover',
-      backgroundPosition: 'bottom'
-    }
+    backgroundImage: 'linear-gradient(rgba(65, 92, 182, 0.5), rgba(27, 172, 116, 0.5))'
   }
 
   setBackgroundImage = () => {
-    this.setState({ styles: {
-      height: '60vh',
-      backgroundImage: `linear-gradient(rgba(65, 92, 182, 0.5), rgba(27, 172, 116, 0.5)), url(${backgroundImages[this.props.time][this.props.currentWeather]})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'bottom'
-    }});
+    this.setState({ 
+      backgroundImage: `linear-gradient(rgba(65, 92, 182, 0.5), rgba(27, 172, 116, 0.5)), url(${backgroundImages[this.props.time][this.props.currentWeather]})`
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -63,7 +57,7 @@ class Background extends Component {
 
   render() {
     return (
-      <div style={this.state.styles}>
+      <div className={styles.Background} style={this.state}>
         {this.props.children}
       </div>
     );
