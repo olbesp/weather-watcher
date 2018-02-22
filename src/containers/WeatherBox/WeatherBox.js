@@ -8,6 +8,7 @@ import DataBox from '../../components/DataBox/DataBox';
 import Header from '../../components/Header/Header';
 import Map from '../../components/Map/Map';
 import Footer from '../../components/Footer/Footer';
+import Spinner from '../../components/Spinner/Spinner';
 
 class WeatherBox extends Component {
   state = {
@@ -80,7 +81,14 @@ class WeatherBox extends Component {
   render() {
     let html = <div></div>;
     if (this.props.time) {
-      html = <div>Loading...</div>
+      html = <div style={{
+        display: 'flex',
+        width: '100%',
+        height: '100vh',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#ccc'
+      }}><Spinner /></div>
     }
     if (this.state.weatherData) {
       html = (
