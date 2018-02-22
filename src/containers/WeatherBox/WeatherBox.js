@@ -7,6 +7,7 @@ import Background from '../../components/Background/Background';
 import DataBox from '../../components/DataBox/DataBox';
 import Header from '../../components/Header/Header';
 import Map from '../../components/Map/Map';
+import Footer from '../../components/Footer/Footer';
 
 class WeatherBox extends Component {
   state = {
@@ -109,7 +110,7 @@ class WeatherBox extends Component {
               />
             </div>
           }
-          <p style={{textAlign: 'center', color: 'white', paddingBottom: '2rem'}}>Made by Oleksii Bespalko using FreeCodeCamp Weather API and Google Maps API</p>
+          <Footer />
         </Background>        
       </Aux>
     );    
