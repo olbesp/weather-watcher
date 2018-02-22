@@ -11,7 +11,7 @@ import Footer from '../../components/Footer/Footer';
 
 class WeatherBox extends Component {
   state = {
-    weatherData: {}
+    weatherData: null
   }
 
   getWeather = () => {
@@ -32,10 +32,6 @@ class WeatherBox extends Component {
         this.setState({ weatherData });
         console.log(this.state);
       });
-  }
-
-  checkLocalData = () => {
-    return this.state.weatherData.locationTitle !== 'Earth';
   }
 
   formatTemperatureData = (temp) => {
@@ -74,25 +70,30 @@ class WeatherBox extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props !== prevProps) {
-      this.getWeather();
+    if (this.props.coordinates.lat && this.props.coordinates.lng) {
+      if (!this.state.weatherData) {
+        this.getWeather();
+      }
     }
   }
 
   render() {
-    return (
-      <Aux>
-        <Background time={this.props.time} currentWeather={this.state.weatherData.weatherType}>
-          <Header
-            location={this.state.weatherData.locationTitle}
-            description={this.state.weatherData.weatherDescription}
-          />
-          {
-            this.state.weatherData.temperature && this.checkLocalData() &&
+    let html = <div></div>;
+    if (this.props.time) {
+      html = <div>Loading...</div>
+    }
+    if (this.state.weatherData) {
+      html = (
+        <Aux>
+          <Background time={this.props.time} currentWeather={this.state.weatherData.weatherType}>
+            <Header
+              location={this.state.weatherData.locationTitle}
+              description={this.state.weatherData.weatherDescription}
+            />
             <div className={styles.WeatherBox}>
               <DataBox indexes={['min', 'max', 'wind']}
                 values={[
-                  this.formatTemperatureData(this.state.weatherData.temperature.min), 
+                  this.formatTemperatureData(this.state.weatherData.temperature.min),
                   this.formatTemperatureData(this.state.weatherData.temperature.max),
                   `${this.state.weatherData.wind.speed}m/s ${this.getCardinalDirection(this.state.weatherData.wind.deg)}`
                 ]}
@@ -109,11 +110,12 @@ class WeatherBox extends Component {
                 isMarkerShown
               />
             </div>
-          }
-          <Footer />
-        </Background>        
-      </Aux>
-    );    
+            <Footer />
+          </Background>
+        </Aux>
+      );    
+    }
+    return html;
   }
 }
 

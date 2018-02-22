@@ -5,10 +5,10 @@ import WeatherBox from './containers/WeatherBox/WeatherBox';
 class App extends Component {
   state = {
     userLocation: {
-      lat: 0,
-      lng: 0
+      lat: null,
+      lng: null
     },
-    timesOfDay: 'night'
+    timesOfDay: null
   }
 
   checkDayTime = () => {

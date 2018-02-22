@@ -40,27 +40,41 @@ const backgroundImages = {
 
 class Background extends Component {
   state = {
-    backgroundImage: 'linear-gradient(rgba(65, 92, 182, 0.5), rgba(27, 172, 116, 0.5))'
+    backgroundImage: null
   }
 
   setBackgroundImage = () => {
-    this.setState({ 
+    this.setState({
       backgroundImage: `linear-gradient(rgba(65, 92, 182, 0.5), rgba(27, 172, 116, 0.5)), url(${backgroundImages[this.props.time][this.props.currentWeather]})`
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props !== prevProps && this.props.currentWeather) {
-      this.setBackgroundImage();
+  componentDidMount() {
+    if (this.props.time && this.props.currentWeather) {
+      if (!this.state.backgroundImage) {
+        this.setBackgroundImage();
+      }
     }
   }
 
   render() {
-    return (
-      <div className={styles.Background} style={this.state}>
-        {this.props.children}
-      </div>
-    );
+    let backgroundComponent = <div>{this.props.childen}</div>
+    if (this.props.time && this.props.currentWeather) {
+      backgroundComponent = (
+        <div className={styles.Background} style={{
+          backgroundImage: 'linear-gradient(rgba(65, 92, 182, 0.5), rgba(27, 172, 116, 0.5))'
+        }}>{this.props.children}
+        </div>
+      );
+    }
+    if (this.state.backgroundImage) {
+      backgroundComponent = (
+        <div className={styles.Background} style={{...this.state}}>
+          {this.props.children}
+        </div>
+      );
+    }
+    return backgroundComponent;
   }
 }
 
