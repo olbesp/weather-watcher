@@ -5,3 +5,11 @@
   align-items: center;
   padding: 4rem 0;
 }
+
+@media (min-width: 768px) {
+  .WeatherBox {
+    flex-direction: row;
+    max-width: 1024px;
+    margin: 0 auto;
+  }
+}

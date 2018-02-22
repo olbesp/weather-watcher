@@ -1,14 +1,13 @@
 .Index {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
+  text-align: center;
   color: white;
 }
 
 .Index h3 {
-  margin: 1rem auto .5rem;
+  margin-bottom: .5rem;
+  font-size: 1.5rem;
 }
 
 .Index span {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
 }

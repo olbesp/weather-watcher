@@ -3,3 +3,16 @@
   height: 25rem;
   box-shadow: 0 1rem 3rem rgba(0,0,0,.5);
 }
+
+@media (min-width: 600px) {
+  .Map {
+    width: 65%;
+  }
+}
+
+@media (min-width: 768px) {
+  .Map {
+    width: 30%;
+    max-width: 350px;
+  }
+}
