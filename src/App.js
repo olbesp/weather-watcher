@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import WeatherBox from './containers/WeatherBox/WeatherBox';
-import Map from './components/Map/Map';
 
 class App extends Component {
   state = {
@@ -40,10 +39,6 @@ class App extends Component {
     return (
       <div>
         <WeatherBox coordinates={{ ...this.state.userLocation }} time={this.state.timesOfDay} />
-        <Map 
-          position={{ ...this.state.userLocation }}
-          isMarkerShown 
-        />
       </div>
     );
   }

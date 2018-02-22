@@ -5,6 +5,7 @@ import Aux from '../../hoc/Aux';
 import Background from '../../components/Background/Background';
 import DataBox from '../../components/DataBox/DataBox';
 import Header from '../../components/Header/Header';
+import Map from '../../components/Map/Map';
 
 class WeatherBox extends Component {
   state = {
@@ -86,7 +87,7 @@ class WeatherBox extends Component {
           />
           {
             this.state.weatherData.temperature && this.checkLocalData() &&
-            <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+            <div>
               <DataBox indexes={['min', 'max', 'wind']}
                 values={[
                   this.formatTemperatureData(this.state.weatherData.temperature.min), 
@@ -100,6 +101,10 @@ class WeatherBox extends Component {
                   `${this.state.weatherData.pressure.toFixed(1)}mb↑`,
                   `${(this.state.weatherData.visibility / 1000).toFixed(1)}km`
                 ]}
+              />
+              <Map
+                position={{ ...this.props.coordinates }}
+                isMarkerShown
               />
             </div>
           }
