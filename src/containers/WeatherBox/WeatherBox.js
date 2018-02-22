@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import styles from './WeatherBox.css';
 import axios from 'axios';
 import Aux from '../../hoc/Aux';
 import Background from '../../components/Background/Background';
@@ -87,7 +88,7 @@ class WeatherBox extends Component {
           />
           {
             this.state.weatherData.temperature && this.checkLocalData() &&
-            <div>
+            <div className={styles.WeatherBox}>
               <DataBox indexes={['min', 'max', 'wind']}
                 values={[
                   this.formatTemperatureData(this.state.weatherData.temperature.min), 
