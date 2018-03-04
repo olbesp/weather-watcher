@@ -52,14 +52,14 @@ class WeatherBox extends Component {
       return '☈';
     }
     const arrows = { 
-      north: '↑ N', 
-      north_east: '↗ NE', 
-      east: '→ E', 
-      south_east: '↘ SE', 
-      south: '↓ S', 
-      south_west: '↙ SW', 
-      west: '← W', 
-      north_west: '↖ NW' 
+      north: '↓ N', 
+      north_east: '↙ NE', 
+      east: '← E', 
+      south_east: '↖ SE', 
+      south: '↑ S', 
+      south_west: '↗ SW', 
+      west: '→ W', 
+      north_west: '↘ NW' 
     };
     const directions = Object.keys(arrows);
     const degree = 360 / directions.length;
