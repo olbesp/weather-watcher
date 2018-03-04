@@ -12,7 +12,8 @@ import Spinner from '../../components/Spinner/Spinner';
 
 class WeatherBox extends Component {
   state = {
-    weatherData: null
+    weatherData: null,
+    error: false
   }
 
   getWeather = () => {
@@ -30,6 +31,9 @@ class WeatherBox extends Component {
           visibility: response.data.visibility
         };
         this.setState({ weatherData });
+      })
+      .catch(error => {
+        this.setState({ error: true });
       });
   }
 
@@ -77,8 +81,16 @@ class WeatherBox extends Component {
   }
 
   render() {
-    let html = <div></div>;
-    if (this.props.time) {
+    let html = this.state.error ? <div style={{
+      textAlign: 'center',
+      fontSize: '3.5rem',
+      paddingTop: '5rem',
+      height: '100vh',
+      color: 'white',
+      backgroundImage: 'linear-gradient(rgba(65, 92, 182, 0.4), rgba(27, 172, 116, 0.4))'
+    }}>Something went wrong!</div> : null;
+    
+    if (this.props.time && !this.state.error) {
       html = <div style={{
         display: 'flex',
         width: '100%',
