@@ -2,22 +2,21 @@ import React, { Component } from 'react';
 
 import WeatherBox from './containers/WeatherBox/WeatherBox';
 
+const checkDayTime = () => {
+  const time = new Date();
+  if (time.getHours() > 5 && time.getHours() < 20) {
+    return 'day';
+  }
+  return 'night';
+}
+
 class App extends Component {
   state = {
     userLocation: {
       lat: null,
       lng: null
     },
-    timesOfDay: null
-  }
-
-  checkDayTime = () => {
-    const time = new Date();
-    if (time.getHours() > 5 && time.getHours() < 20) {
-      this.setState({ timesOfDay: 'day' });
-    } else {
-      this.setState({ timesOfDay: 'night' });
-    }
+    timesOfDay: checkDayTime()
   }
 
   getLocation = () => {
@@ -31,14 +30,16 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.checkDayTime();
     this.getLocation();
   }
 
   render() {
     return (
       <div>
-        <WeatherBox coordinates={{ ...this.state.userLocation }} time={this.state.timesOfDay} />
+        <WeatherBox 
+          coordinates={{ ...this.state.userLocation }} 
+          time={this.state.timesOfDay} 
+        />
       </div>
     );
   }
