@@ -29,7 +29,12 @@ class WeatherBox extends Component {
           pressure: response.data.main.pressure,
           visibility: response.data.visibility
         };
-        this.setState({ weatherData });
+        // Fix incorrect response from API with default location
+        if (weatherData.locationTitle !== 'Shuzenji') {
+          this.setState({ weatherData });
+        } else {
+          this.setState({ weatherData: null });
+        }
       })
       .catch(error => {
         this.setState({ error: true });
