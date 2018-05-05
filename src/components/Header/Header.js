@@ -1,7 +1,6 @@
 import React from 'react';
 
 import styles from './Header.css';
-import Aux from '../../hoc/Aux';
 import Marker from '../../assets/images/marker.png';
 
 const header = (props) => (
@@ -9,10 +8,10 @@ const header = (props) => (
     <h1 className={styles.AppTitle}>Weather Watcher</h1>
     {
       props.location === 'Earth' || typeof props.description !== 'string' ? <div></div> :
-      <Aux>
+      <React.Fragment>
         <h3><img src={Marker} alt="Marker" /> {props.location}</h3>
         <h4>{props.description}</h4>
-      </Aux>
+      </React.Fragment>
     }
     
   </header>

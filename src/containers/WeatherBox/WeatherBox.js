@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import styles from './WeatherBox.css';
 import axios from 'axios';
-import Aux from '../../hoc/Aux';
 import Background from '../../components/Background/Background';
 import DataBox from '../../components/DataBox/DataBox';
 import Header from '../../components/Header/Header';
@@ -102,7 +101,7 @@ class WeatherBox extends Component {
     }
     if (this.state.weatherData) {
       html = (
-        <Aux>
+        <React.Fragment>
           <Background time={this.props.time} currentWeather={this.state.weatherData.weatherType}>
             <Header
               location={this.state.weatherData.locationTitle}
@@ -130,7 +129,7 @@ class WeatherBox extends Component {
             </div>
             <Footer />
           </Background>
-        </Aux>
+        </React.Fragment>
       );    
     }
     return html;
