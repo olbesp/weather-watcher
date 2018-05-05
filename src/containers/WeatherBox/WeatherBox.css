@@ -9,7 +9,7 @@
 @media (min-width: 768px) {
   .WeatherBox {
     flex-direction: row;
-    max-width: 1024px;
+    max-width: 1200px;
     margin: 0 auto;
   }
 }

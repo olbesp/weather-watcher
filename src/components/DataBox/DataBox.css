@@ -19,7 +19,7 @@
 @media (min-width: 768px) {
   .DataBox {
     width: 30%;
-    max-width: 350px;
+    max-width: 450px;
     margin-bottom: 0;
   }
 }
