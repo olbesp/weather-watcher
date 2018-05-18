@@ -11,11 +11,21 @@ export const getLocationFail = error => ({
 });
 
 export const getLocation = () => dispatch => {
-  window.navigator.geolocation.getCurrentPosition((position) => {
-    const userLocation = {
-      lat: position.coords.latitude,
-      lng: position.coords.longitude
-    };
-    dispatch(getLocationSuccess(userLocation));
-  });
+  window.navigator.geolocation.getCurrentPosition(
+    position => {
+      const userLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      dispatch(getLocationSuccess(userLocation));
+    },
+    error => {
+      dispatch(getLocationFail(error))
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0
+    }
+  );
 };

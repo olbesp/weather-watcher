@@ -3,45 +3,45 @@ import { connect } from 'react-redux';
 
 import WeatherBox from './containers/WeatherBox/WeatherBox';
 import * as actions from './store/actions/index';
+import Spinner from './components/Spinner/Spinner';
 
 class App extends Component {
-  // state = {
-  //   userLocation: {
-  //     lat: null,
-  //     lng: null
-  //   },
-  //   timesOfDay: checkDayTime()
-  // }
-
-  // getLocation = () => {
-  //   navigator.geolocation.getCurrentPosition((position) => {
-  //     const userLocation = {
-  //         lat: position.coords.latitude,
-  //         lng: position.coords.longitude 
-  //     };
-  //     this.setState({ userLocation });
-  //   });
-  // }
 
   componentDidMount() {
     this.props.onGetLocation();
   }
 
   render() {
-    return (
-      <div>
-        <WeatherBox 
-          coordinates={{ ...this.props.location }} 
-          time={this.props.time} 
+    console.log(this.props.location, this.props.error)
+    let html = <Spinner />;
+
+    if (this.props.location) {
+      html = (
+        <WeatherBox
+          coordinates={{ ...this.props.location }}
+          time={this.props.time}
         />
-      </div>
-    );
+      );
+    }
+
+    if (this.props.error) {
+      const style = {
+        marginTop: '50vh',
+        fontSize: '5rem',
+        color: '#777',
+        textAlign: 'center'
+      };
+      html = <div style={style}>{this.props.error.message}</div>
+    }
+
+    return html;
   }
 }
 
 const mapStateToProps = state => ({
   location: state.location.location,
-  time: state.location.timesOfDay
+  time: state.location.timesOfDay,
+  error: state.location.error
 });
 
 const mapDispatchToProps = dispatch => ({

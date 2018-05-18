@@ -15,7 +15,7 @@ const initialState = {
     lng: null
   },
   timesOfDay: checkDayTime(),
-  error: false
+  error: null
 };
 
 const getLocation = (state, action) => ({
@@ -23,12 +23,19 @@ const getLocation = (state, action) => ({
   location: {
     ...action.location
   },
-  error: false
+  error: null
+});
+
+const getLocationFail = (state, action) => ({
+  ...state,
+  location: { ...state.location },
+  error: action.error
 });
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_LOCATION_SUCCESS: return getLocation(state, action);
+    case actionTypes.GET_LOCATION_FAIL: return getLocationFail(state,action);
     default: return state;
   }
 };
