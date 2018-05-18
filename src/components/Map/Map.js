@@ -15,7 +15,7 @@ const map = compose(
   }),
   withScriptjs,
   withGoogleMap,
-)((props) => (
+)(props => (
   <GoogleMap
     defaultZoom={12}
     center={props.position}
@@ -25,4 +25,3 @@ const map = compose(
 ));
 
 export default map;
-

@@ -12,7 +12,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props.location, this.props.error)
     let html = <Spinner />;
 
     if (this.props.location) {
@@ -31,7 +30,7 @@ class App extends Component {
         color: '#777',
         textAlign: 'center'
       };
-      html = <div style={style}>{this.props.error.message}</div>
+      html = <div style={style}>{this.props.error.message}</div>;
     }
 
     return html;

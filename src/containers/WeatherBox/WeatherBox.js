@@ -85,61 +85,63 @@ class WeatherBox extends Component {
   }
 
   render() {
-    let html = this.state.error ? <div style={{
+    let style = {
       textAlign: 'center',
       fontSize: '3.5rem',
       paddingTop: '5rem',
       height: '100vh',
       color: 'white',
       backgroundImage: 'linear-gradient(rgba(65, 92, 182, 0.4), rgba(27, 172, 116, 0.4))'
-    }}>Something went wrong!</div> : null;
+    };
+    let html = this.state.error ? 
+      <div style={style}>Something went wrong!</div> : 
+      null;
     
     if (this.props.time && !this.state.error) {
-      html = <div style={{
+      style = {
         display: 'flex',
         width: '100%',
         height: '100vh',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#ccc'
-      }}><Spinner /></div>
+      };
+      html = <div style={style}><Spinner /></div>
     }
     if (this.state.weatherData) {
       html = (
-        <React.Fragment>
-          <Background time={this.props.time} currentWeather={this.state.weatherData.weatherType}>
-            <Header
-              location={this.state.weatherData.locationTitle}
-              description={this.state.weatherData.weatherDescription}
+        <Background time={this.props.time} currentWeather={this.state.weatherData.weatherType}>
+          <Header
+            location={this.state.weatherData.locationTitle}
+            description={this.state.weatherData.weatherDescription}
+          />
+          <div className={styles.WeatherBox}>
+            <DataBox indexes={['min', 'max', 'wind']}
+              values={[
+                this.formatTemperatureData(this.state.weatherData.temperature.min),
+                this.formatTemperatureData(this.state.weatherData.temperature.max),
+                `${this.state.weatherData.wind.speed}m/s ${this.getCardinalDirection(this.state.weatherData.wind.deg)}`
+              ]}
             />
-            <div className={styles.WeatherBox}>
-              <DataBox indexes={['min', 'max', 'wind']}
-                values={[
-                  this.formatTemperatureData(this.state.weatherData.temperature.min),
-                  this.formatTemperatureData(this.state.weatherData.temperature.max),
-                  `${this.state.weatherData.wind.speed}m/s ${this.getCardinalDirection(this.state.weatherData.wind.deg)}`
-                ]}
-              />
-              <DataBox indexes={['humidity', 'pressure', 'visibility']}
-                values={[
-                  `${this.state.weatherData.humidity}%`,
-                  `${this.state.weatherData.pressure.toFixed(1)}mb↑`,
-                  `${(this.state.weatherData.visibility / 1000).toFixed(1)}km`
-                ]}
-              />
-              <Map
-                position={{ ...this.props.coordinates }}
-                isMarkerShown
-              />
-            </div>
-            <Footer />
-          </Background>
-        </React.Fragment>
+            <DataBox indexes={['humidity', 'pressure', 'visibility']}
+              values={[
+                `${this.state.weatherData.humidity}%`,
+                `${this.state.weatherData.pressure.toFixed(1)}mb↑`,
+                `${(this.state.weatherData.visibility / 1000).toFixed(1)}km`
+              ]}
+            />
+            <Map
+              position={{ ...this.props.coordinates }}
+              isMarkerShown
+            />
+          </div>
+          <Footer />
+        </Background>
       );    
     }
+
     return html;
   }
 }
 
 export default WeatherBox;
-

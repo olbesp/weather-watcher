@@ -58,7 +58,7 @@ class Background extends Component {
   }
 
   render() {
-    let backgroundComponent = <div>{this.props.childen}</div>
+    let backgroundComponent = <div>{this.props.childen}</div>;
     if (this.props.time && this.props.currentWeather) {
       backgroundComponent = (
         <div className={styles.Background} style={{
@@ -74,6 +74,7 @@ class Background extends Component {
         </div>
       );
     }
+
     return backgroundComponent;
   }
 }

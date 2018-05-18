@@ -1,11 +1,11 @@
 import * as actionTypes from './actionTypes';
 
-export const getLocationSuccess = location => ({
+const getLocationSuccess = location => ({
   type: actionTypes.GET_LOCATION_SUCCESS,
   location
 });
 
-export const getLocationFail = error => ({
+const getLocationFail = error => ({
   type: actionTypes.GET_LOCATION_FAIL,
   error
 });
