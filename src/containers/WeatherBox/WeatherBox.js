@@ -12,41 +12,6 @@ import * as actions from '../../store/actions/index';
 
 class WeatherBox extends Component {
 
-  formatTemperatureData = (temp) => {
-    if (temp <= 0) {
-      return `${temp.toString()}˚C`;
-    }
-    return `+${temp.toString()}˚C`;
-  }
-
-  getCardinalDirection = (angle) => {
-    if (typeof angle === 'string') {
-      angle = parseInt(angle, 10);
-    }
-    if (angle <= 0 || angle > 360 || typeof angle === 'undefined') {
-      return '☈';
-    }
-    const arrows = { 
-      north: '↓ N', 
-      north_east: '↙ NE', 
-      east: '← E', 
-      south_east: '↖ SE', 
-      south: '↑ S', 
-      south_west: '↗ SW', 
-      west: '→ W', 
-      north_west: '↘ NW' 
-    };
-    const directions = Object.keys(arrows);
-    const degree = 360 / directions.length;
-    angle = angle + degree / 2;
-    for (let i = 0; i < directions.length; i++) {
-      if (angle >= (i * degree) && angle < (i + 1) * degree) {
-        return arrows[directions[i]];
-      }
-    }
-    return arrows['north'];
-  }
-
   componentDidUpdate(prevProps, prevState) {
     if (this.props.coordinates.lat && this.props.coordinates.lng) {
       if (!this.props.weatherData) {
@@ -89,16 +54,16 @@ class WeatherBox extends Component {
           <div className={styles.WeatherBox}>
             <DataBox indexes={['min', 'max', 'wind']}
               values={[
-                this.formatTemperatureData(this.props.weatherData.tempMin),
-                this.formatTemperatureData(this.props.weatherData.tempMax),
-                `${this.props.weatherData.windSpeed}m/s ${this.getCardinalDirection(this.props.weatherData.windDeg)}`
+                this.props.weatherData.tempMin,
+                this.props.weatherData.tempMax,
+                `${this.props.weatherData.windSpeed} ${this.props.weatherData.windDeg}`
               ]}
             />
             <DataBox indexes={['humidity', 'pressure', 'visibility']}
               values={[
-                `${this.props.weatherData.humidity}%`,
-                `${this.props.weatherData.pressure.toFixed(1)}mb↑`,
-                `${(this.props.weatherData.visibility / 1000).toFixed(1)}km`
+                this.props.weatherData.humidity,
+                this.props.weatherData.pressure,
+                this.props.weatherData.visibility
               ]}
             />
             <Map
