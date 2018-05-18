@@ -1,45 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import styles from './WeatherBox.css';
-import axios from 'axios';
 import Background from '../../components/Background/Background';
 import DataBox from '../../components/DataBox/DataBox';
 import Header from '../../components/Header/Header';
 import Map from '../../components/Map/Map';
 import Footer from '../../components/Footer/Footer';
 import Spinner from '../../components/Spinner/Spinner';
+import * as actions from '../../store/actions/index';
 
 class WeatherBox extends Component {
-  state = {
-    weatherData: null,
-    error: false
-  }
-
-  getWeather = () => {
-    const url = `https://fcc-weather-api.glitch.me/api/current?lat=${this.props.coordinates.lat}&lon=${this.props.coordinates.lng}`;
-    axios.get(url)
-      .then(response => {
-        const weatherData = {
-          locationTitle: response.data.name,
-          weatherType: response.data.weather[0].main.toLowerCase(),
-          weatherDescription: response.data.weather[0].description,
-          temperature: { min: response.data.main.temp_min, max: response.data.main.temp_max },
-          wind: { deg: response.data.wind.deg, speed: response.data.wind.speed },
-          humidity: response.data.main.humidity,
-          pressure: response.data.main.pressure,
-          visibility: response.data.visibility
-        };
-        // Fix incorrect response from API with default location
-        if (weatherData.locationTitle !== 'Shuzenji') {
-          this.setState({ weatherData });
-        } else {
-          this.setState({ weatherData: null });
-        }
-      })
-      .catch(error => {
-        this.setState({ error: true });
-      });
-  }
 
   formatTemperatureData = (temp) => {
     if (temp <= 0) {
@@ -78,8 +49,8 @@ class WeatherBox extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.coordinates.lat && this.props.coordinates.lng) {
-      if (!this.state.weatherData) {
-        this.getWeather();
+      if (!this.props.weatherData) {
+        this.props.onGetWeather(this.props.coordinates);
       }
     }
   }
@@ -93,11 +64,11 @@ class WeatherBox extends Component {
       color: 'white',
       backgroundImage: 'linear-gradient(rgba(65, 92, 182, 0.4), rgba(27, 172, 116, 0.4))'
     };
-    let html = this.state.error ? 
+    let html = this.props.error ? 
       <div style={style}>Something went wrong!</div> : 
       null;
     
-    if (this.props.time && !this.state.error) {
+    if (this.props.time && !this.props.error) {
       style = {
         display: 'flex',
         width: '100%',
@@ -108,26 +79,26 @@ class WeatherBox extends Component {
       };
       html = <div style={style}><Spinner /></div>
     }
-    if (this.state.weatherData) {
+    if (this.props.weatherData) {
       html = (
-        <Background time={this.props.time} currentWeather={this.state.weatherData.weatherType}>
+        <Background time={this.props.time} currentWeather={this.props.weatherData.weatherType}>
           <Header
-            location={this.state.weatherData.locationTitle}
-            description={this.state.weatherData.weatherDescription}
+            location={this.props.weatherData.locationTitle}
+            description={this.props.weatherData.weatherDescription}
           />
           <div className={styles.WeatherBox}>
             <DataBox indexes={['min', 'max', 'wind']}
               values={[
-                this.formatTemperatureData(this.state.weatherData.temperature.min),
-                this.formatTemperatureData(this.state.weatherData.temperature.max),
-                `${this.state.weatherData.wind.speed}m/s ${this.getCardinalDirection(this.state.weatherData.wind.deg)}`
+                this.formatTemperatureData(this.props.weatherData.tempMin),
+                this.formatTemperatureData(this.props.weatherData.tempMax),
+                `${this.props.weatherData.windSpeed}m/s ${this.getCardinalDirection(this.props.weatherData.windDeg)}`
               ]}
             />
             <DataBox indexes={['humidity', 'pressure', 'visibility']}
               values={[
-                `${this.state.weatherData.humidity}%`,
-                `${this.state.weatherData.pressure.toFixed(1)}mb↑`,
-                `${(this.state.weatherData.visibility / 1000).toFixed(1)}km`
+                `${this.props.weatherData.humidity}%`,
+                `${this.props.weatherData.pressure.toFixed(1)}mb↑`,
+                `${(this.props.weatherData.visibility / 1000).toFixed(1)}km`
               ]}
             />
             <Map
@@ -144,4 +115,13 @@ class WeatherBox extends Component {
   }
 }
 
-export default WeatherBox;
+const mapStateToProps = state => ({
+  weatherData: state.weather.weatherData,
+  error: state.weather.error
+});
+
+const mapDispatchToProps = dispatch => ({
+  onGetWeather: coordinates => dispatch(actions.getWeather(coordinates))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(WeatherBox);

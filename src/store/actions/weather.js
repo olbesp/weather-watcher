@@ -6,21 +6,22 @@ const getWeatherSuccess = weatherData => ({
   weatherData
 });
 
-const getWeatherFail = error => ({
-  type: actionTypes.GET_WEATHER_FAIL,
-  error
+const getWeatherFail = () => ({
+  type: actionTypes.GET_WEATHER_FAIL
 });
 
-export const getWeather = () => dispatch => {
-  const url = `https://fcc-weather-api.glitch.me/api/current?lat=${this.props.coordinates.lat}&lon=${this.props.coordinates.lng}`;
+export const getWeather = coordinates => dispatch => {
+  const url = `https://fcc-weather-api.glitch.me/api/current?lat=${coordinates.lat}&lon=${coordinates.lng}`;
   axios.get(url)
     .then(response => {
       const weatherData = {
         locationTitle: response.data.name,
         weatherType: response.data.weather[0].main.toLowerCase(),
         weatherDescription: response.data.weather[0].description,
-        temperature: { min: response.data.main.temp_min, max: response.data.main.temp_max },
-        wind: { deg: response.data.wind.deg, speed: response.data.wind.speed },
+        tempMin: response.data.main.temp_min,
+        tempMax: response.data.main.temp_max,
+        windDeg: response.data.wind.deg, 
+        windSpeed: response.data.wind.speed,
         humidity: response.data.main.humidity,
         pressure: response.data.main.pressure,
         visibility: response.data.visibility
@@ -33,6 +34,6 @@ export const getWeather = () => dispatch => {
       }
     })
     .catch(error => {
-      dispatch(getWeatherFail(error));
+      dispatch(getWeatherFail());
     });
 };

@@ -5,12 +5,18 @@ const initialState = {
   error: false
 };
 
-const getWeatherSuccess = (state, action) => ({
-
+const getWeather = (state, action) => ({
+  ...state,
+  weatherData: {
+    ...action.weatherData
+  },
+  error: false
 });
 
 const getWeatherFail = (state, action) => ({
-
+  ...state,
+  weatherData: null,
+  error: true
 });
 
 const reducer = (state = initialState, action) => {

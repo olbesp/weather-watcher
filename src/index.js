@@ -8,11 +8,13 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import locationReducer from './store/reducers/location';
+import weatherReducer from './store/reducers/weather';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-  location: locationReducer
+  location: locationReducer,
+  weather: weatherReducer
 });
 
 const store = createStore(
