@@ -21,29 +21,14 @@ class WeatherBox extends Component {
   }
 
   render() {
-    let style = {
-      textAlign: 'center',
-      fontSize: '3.5rem',
-      paddingTop: '5rem',
-      height: '100vh',
-      color: 'white',
-      backgroundImage: 'linear-gradient(rgba(65, 92, 182, 0.4), rgba(27, 172, 116, 0.4))'
-    };
-    let html = this.props.error ? 
-      <div style={style}>Something went wrong!</div> : 
-      null;
+    let html = this.props.error 
+      ? <div className={styles.WeatherBox__error}>Something went wrong!</div> 
+      : null;
     
     if (this.props.time && !this.props.error) {
-      style = {
-        display: 'flex',
-        width: '100%',
-        height: '100vh',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#ccc'
-      };
-      html = <div style={style}><Spinner /></div>
+      html = <div className={styles.WeatherBox__loading}><Spinner /></div>
     }
+    
     if (this.props.weatherData) {
       html = (
         <Background time={this.props.time} currentWeather={this.props.weatherData.weatherType}>
